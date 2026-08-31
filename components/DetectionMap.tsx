@@ -1,6 +1,6 @@
 "use client";
 
-import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
+import { AdvancedMarker, APIProvider, Map } from "@vis.gl/react-google-maps";
 
 const detections = [
   {

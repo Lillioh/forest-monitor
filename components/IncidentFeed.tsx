@@ -1,139 +1,136 @@
 "use client";
 
-import { MoreVertical } from "lucide-react";
-
-const incidents = [
-  {
-    status: "NEW PING",
-    time: "00:00:11 ago",
-    coordinates: "8.4542°N, 124.6319°E",
-    confidence: "96.2%",
-    radius: "±8m",
-    active: true,
-  },
-  {
-    status: "DISPATCHED",
-    time: "14 min ago",
-    coordinates: "8.4498°N, 124.6287°E",
-    confidence: "91.7%",
-    radius: "±11m",
-  },
-  {
-    status: "RESOLVED",
-    time: "1h 02m ago",
-    coordinates: "8.4561°N, 124.6402°E",
-    confidence: "88.4%",
-    radius: "±9m",
-  },
-  {
-    status: "RESOLVED",
-    time: "3h 41m ago",
-    coordinates: "8.4477°N, 124.6355°E",
-    confidence: "93.0%",
-    radius: "±7m",
-  },
-  {
-    status: "RESOLVED",
-    time: "Yesterday",
-    coordinates: "8.4519°N, 124.6270°E",
-    confidence: "85.9%",
-    radius: "±12m",
-  },
-];
+import { useAlerts } from "@/context/AlertsContext";
+import { formatCoords, formatRelativeTime } from "@/lib/format";
+import type { Alert } from "@/lib/types";
+import { useNow } from "@/lib/use-now";
+import Link from "next/link";
 
 export default function IncidentFeed() {
+  const { alerts, dispatchAlert, markResolved, triggerDetection } = useAlerts();
+  const now = useNow();
+  const visible = alerts.slice(0, 5);
+
   return (
     <aside className="hidden w-[280px] shrink-0 border-l border-[#1e2b24] bg-[#0c1510] p-3 lg:block">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-xs font-bold tracking-wide text-gray-200">
-          INCIDENT FEED
-        </h2>
-
-        <MoreVertical size={14} className="text-gray-600" />
+        <h2 className="text-xs font-bold tracking-wide text-gray-200">INCIDENT FEED</h2>
+        <button
+          onClick={triggerDetection}
+          title="Manually simulate a new sensor detection (stand-in for the LoRa/Raspberry Pi feed, not yet connected)"
+          className="rounded border border-[#26352b] px-2 py-1 text-[9px] text-gray-400 hover:bg-[#19251e]"
+        >
+          + Simulate Ping
+        </button>
       </div>
 
-      <div className="space-y-2">
-        {incidents.map((incident, index) => (
-          <Incident
-            key={index}
-            {...incident}
-          />
-        ))}
-      </div>
+      {visible.length === 0 ? (
+        <div className="rounded-md border border-dashed border-[#26352b] p-4 text-center text-[10px] text-gray-600">
+          No detections yet. Waiting on the sensor mesh
+          <span className="animate-pulse">…</span>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {visible.map((incident) => (
+            <IncidentCard
+              key={incident.id}
+              incident={incident}
+              now={now}
+              onDispatch={() => dispatchAlert(incident.id)}
+              onResolve={() => markResolved(incident.id)}
+            />
+          ))}
+        </div>
+      )}
     </aside>
   );
 }
 
-function Incident({
-  status,
-  time,
-  coordinates,
-  confidence,
-  radius,
-  active,
+function IncidentCard({
+  incident,
+  now,
+  onDispatch,
+  onResolve,
 }: {
-  status: string;
-  time: string;
-  coordinates: string;
-  confidence: string;
-  radius: string;
-  active?: boolean;
+  incident: Alert;
+  now: number;
+  onDispatch: () => void;
+  onResolve: () => void;
 }) {
+  const isNew = incident.status === "NEW";
+  const isDispatched = incident.status === "DISPATCHED";
+
+  const statusLabel =
+    incident.status === "NEW"
+      ? "NEW PING"
+      : incident.status === "FALSE_POSITIVE"
+        ? "FALSE POSITIVE"
+        : incident.status;
+
   return (
     <div
       className={`rounded-md border p-3 ${
-        active
-          ? "border-[#e45642] bg-[#1c1d16]"
-          : "border-[#26352b] bg-[#121c16]"
+        isNew ? "border-[#e45642] bg-[#1c1d16]" : "border-[#26352b] bg-[#121c16]"
       }`}
     >
       <div className="flex items-center justify-between">
         <span
           className={`text-[8px] font-bold ${
-            active
+            isNew
               ? "text-[#e95b47]"
-              : status === "DISPATCHED"
+              : isDispatched
                 ? "text-[#e7a52c]"
-                : "text-[#65a96d]"
+                : incident.status === "FALSE_POSITIVE"
+                  ? "text-gray-500"
+                  : "text-[#65a96d]"
           }`}
         >
-          {status}
+          {statusLabel}
         </span>
-
         <span className="text-[8px] text-gray-600">
-          {time}
+          {formatRelativeTime(incident.timestamp, now)}
         </span>
       </div>
 
       <p className="mt-2 font-mono text-[10px] text-gray-200">
-        {coordinates}
+        {formatCoords(incident.lat, incident.lng)}
       </p>
 
       <p className="mt-1 text-[9px] text-gray-500">
-        Confidence:{" "}
-        <span className="text-gray-300">
-          {confidence}
-        </span>{" "}
-        Radius:{" "}
-        <span className="text-gray-300">
-          {radius}
-        </span>
+        Confidence: <span className="text-gray-300">{incident.confidence.toFixed(1)}%</span>{" "}
+        Radius: <span className="text-gray-300">±{incident.radiusM}m</span>
       </p>
 
       <div className="mt-3 flex gap-2">
-        {active ? (
-          <button className="flex-1 rounded bg-[#e6a52d] py-2 text-[9px] font-bold text-black transition hover:bg-[#f0b63c]">
+        {isNew ? (
+          <button
+            onClick={onDispatch}
+            className="flex-1 rounded bg-[#e6a52d] py-2 text-[9px] font-bold text-black transition hover:bg-[#f0b63c]"
+          >
             Dispatch DENR/ENRO
           </button>
-        ) : (
-          <button className="flex-1 rounded border border-[#26352b] py-2 text-[9px] text-gray-400 hover:bg-[#19251e]">
-            {status === "DISPATCHED" ? "Mark Resolved" : "Report"}
+        ) : isDispatched ? (
+          <button
+            onClick={onResolve}
+            className="flex-1 rounded border border-[#26352b] py-2 text-[9px] text-gray-400 hover:bg-[#19251e]"
+          >
+            Mark Resolved
           </button>
+        ) : (
+          <Link
+            href={`/incidents/${incident.id}`}
+            className="flex-1 rounded border border-[#26352b] py-2 text-center text-[9px] text-gray-400 hover:bg-[#19251e]"
+          >
+            Report
+          </Link>
         )}
 
-        <button className="rounded border border-[#26352b] px-3 text-[9px] text-gray-400 hover:bg-[#19251e]">
+        <Link
+          href={`/incidents/${incident.id}`}
+          className="rounded border border-[#26352b] px-3 py-2 text-[9px] text-gray-400 hover:bg-[#19251e]"
+        >
           View
-        </button>
+        </Link>
       </div>
     </div>
   );

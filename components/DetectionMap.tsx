@@ -5,17 +5,29 @@ import { AdvancedMarker, APIProvider, Map } from "@vis.gl/react-google-maps";
 const detections = [
   {
     id: 1,
-    lat: 8.4822,
-    lng: 124.6472,
+    lat: 8.460140,
+    lng: 124.700302,
     label: "Chainsaw Detection",
   },
   {
     id: 2,
-    lat: 8.4855,
-    lng: 124.6501,
+    lat: 8.458825,
+    lng: 124.701397,
+    label: "Possible Illegal Logging",
+  },
+  {
+    id: 3,
+    lat: 8.460395,
+    lng: 124.701965,
     label: "Possible Illegal Logging",
   },
 ];
+
+// Default map location
+const DEFAULT_CENTER = {
+  lat: 8.459787,
+  lng: 124.701221,
+};
 
 export default function DetectionMap() {
   return (
@@ -24,11 +36,8 @@ export default function DetectionMap() {
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
       >
         <Map
-          defaultCenter={{
-            lat: 8.4822,
-            lng: 124.6472,
-          }}
-          defaultZoom={14}
+          defaultCenter={DEFAULT_CENTER}
+          defaultZoom={15}
           mapId="DEMO_MAP_ID"
         >
           {detections.map((detection) => (

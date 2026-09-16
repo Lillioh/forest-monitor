@@ -8,20 +8,21 @@ import {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#07100b] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#eef7f0] text-[#183126]">
       
       {/* Background */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-40"
+          className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
-            backgroundImage: "url('/forest-map.jpg')",
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=85')",
           }}
         />
 
-        <div className="absolute inset-0 bg-[#07100b]/75" />
+        <div className="absolute inset-0 bg-[#edf7ef]/70" />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#07100b] via-[#07100b]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#edf7ef] via-[#edf7ef]/85 to-transparent" />
       </div>
 
       {/* Grid */}
@@ -40,22 +41,22 @@ export default function Home() {
         {/* Header */}
         <header className="flex h-20 items-center justify-between border-b border-white/10 px-8 lg:px-14">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#6a8b70] bg-[#152319]">
-              <Activity size={18} className="text-[#8ab58d]" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#b8d2bb] bg-[#edf6ef]">
+              <Activity size={18} className="text-[#4d8a60]" />
             </div>
 
             <div>
-              <p className="text-sm font-semibold tracking-[0.18em]">
+              <p className="text-sm font-semibold tracking-[0.18em] text-[#183126]">
                 FOREST MONITOR
               </p>
 
-              <p className="text-[9px] uppercase tracking-widest text-[#728178]">
+              <p className="text-[9px] uppercase tracking-widest text-[#567260]">
                 Acoustic Detection System
               </p>
             </div>
           </div>
 
-          <div className="hidden items-center gap-2 text-[10px] uppercase tracking-widest text-[#718077] sm:flex">
+          <div className="hidden items-center gap-2 text-[10px] uppercase tracking-widest text-[#55715f] sm:flex">
             <span className="h-1.5 w-1.5 rounded-full bg-[#70b878]" />
             Monitoring Network Online
           </div>
@@ -67,19 +68,19 @@ export default function Home() {
 
             {/* Left */}
             <div className="max-w-2xl">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#3d5544] bg-[#101c14]/80 px-3 py-1.5">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#cfe0d1] bg-[#f4faf5]/90 px-3 py-1.5">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#74bd7a]" />
 
-                <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#8ca193]">
+                <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#527264]">
                   Real-Time Forest Surveillance
                 </span>
               </div>
 
-              <h1 className="text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+              <h1 className="text-5xl font-semibold leading-[1.05] tracking-tight text-[#183126] sm:text-6xl lg:text-7xl">
                 Protect the
                 <br />
 
-                <span className="text-[#91b995]">
+                <span className="text-[#4d8a60]">
                   forest.
                 </span>
 
@@ -88,7 +89,7 @@ export default function Home() {
                 Detect threats.
               </h1>
 
-              <p className="mt-7 max-w-xl text-sm leading-7 text-[#8b9990] sm:text-base">
+              <p className="mt-7 max-w-xl text-sm leading-7 text-[#55715f] sm:text-base">
                 An intelligent acoustic monitoring platform for detecting
                 suspicious forest activity, identifying chainsaw signals,
                 and estimating incident locations using distributed sensor
@@ -119,22 +120,22 @@ export default function Home() {
 
             {/* Login card */}
             <div className="mx-auto w-full max-w-[410px] lg:ml-auto">
-              <div className="rounded-2xl border border-[#2b3c31] bg-[#0c1510]/95 p-7 shadow-2xl backdrop-blur-xl sm:p-9">
+              <div className="rounded-2xl border border-[#cfe0d1] bg-[#f4faf5]/95 p-7 shadow-2xl backdrop-blur-xl sm:p-9">
 
                 {/* Card header */}
                 <div className="mb-8">
-                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-[#18261d]">
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-[#edf6ef]">
                     <ShieldCheck
                       size={21}
-                      className="text-[#8fb593]"
+                      className="text-[#4d8a60]"
                     />
                   </div>
 
-                  <h2 className="text-xl font-semibold">
+                  <h2 className="text-xl font-semibold text-[#183126]">
                     Sign in to Forest Monitor
                   </h2>
 
-                  <p className="mt-2 text-xs leading-5 text-[#718077]">
+                  <p className="mt-2 text-xs leading-5 text-[#587263]">
                     Authorized personnel only. Continue using your
                     organization account.
                   </p>
@@ -154,19 +155,19 @@ export default function Home() {
                 </div>
 
                 {/* Security info */}
-                <div className="space-y-3 rounded-lg border border-[#233129] bg-[#101a14] p-4">
+                <div className="space-y-3 rounded-lg border border-[#d6e7d9] bg-[#f1f8f3] p-4">
                   <SecurityItem text="No password stored by Forest Monitor" />
                   <SecurityItem text="Authenticated through Google OAuth" />
                   <SecurityItem text="Encrypted authentication session" />
                 </div>
 
-                <p className="mt-6 text-center text-[9px] leading-4 text-[#4f5d54]">
+                <p className="mt-6 text-center text-[9px] leading-4 text-[#516b5d]">
                   Access is restricted to authorized monitoring personnel.
                   By continuing, you agree to the system's access policies.
                 </p>
               </div>
 
-              <p className="mt-5 text-center text-[9px] uppercase tracking-widest text-[#4b5a51]">
+              <p className="mt-5 text-center text-[9px] uppercase tracking-widest text-[#55715f]">
                 Forest Outpost Network • Secure Access
               </p>
             </div>

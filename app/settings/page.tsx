@@ -181,8 +181,8 @@ export default function SettingsPage() {
                 onClick={() => toggleChannel(channel)}
                 className={`rounded-full border px-3 py-1.5 text-[10px] transition ${
                   active
-                    ? "border-[#62b66d]/50 bg-[#62b66d]/15 text-[#8fd497]"
-                    : "border-[#24332a] text-gray-500 hover:border-[#3a4d40]"
+                    ? "border-[#62b66d]/50 bg-[#62b66d]/15 text-[#4d8a60]"
+                    : "border-[#24332a] text-[#4a6256] hover:border-[#3a4d40]"
                 }`}
               >
                 {channel}
@@ -215,14 +215,14 @@ export default function SettingsPage() {
           <tbody>
             {teams.map((team) => (
               <tr key={team.id} className="border-t border-[#1b2620]">
-                <td className="py-2 text-gray-200">{team.name}</td>
+                <td className="py-2 text-[#183126]">{team.name}</td>
                 <td className="py-2 text-gray-400">{team.members} rangers</td>
                 <td className="py-2 text-gray-400">{team.channel}</td>
                 <td className="py-2">
                   <span
                     className={`rounded px-2 py-0.5 text-[9px] font-bold ${
                       team.status === "ACTIVE"
-                        ? "bg-[#62b66d]/15 text-[#8fd497]"
+                        ? "bg-[#62b66d]/15 text-[#4d8a60]"
                         : team.status === "STANDBY"
                           ? "bg-[#e7a52c]/15 text-[#e7a52c]"
                           : "bg-gray-600/15 text-gray-500"
@@ -317,7 +317,7 @@ export default function SettingsPage() {
       </Panel>
 
       {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 rounded-md border border-[#24332a] bg-[#101a14] px-4 py-2 text-[11px] text-gray-200 shadow-lg">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 rounded-md border border-[#2a4039] bg-[#112720] px-4 py-2 text-[11px] text-[#edf5ef] shadow-lg">
           {toast}
         </div>
       )}
@@ -326,15 +326,15 @@ export default function SettingsPage() {
         .input {
           width: 100%;
           border-radius: 0.375rem;
-          border: 1px solid #24332a;
-          background: #0f1913;
+          border: 1px solid var(--box-bronze);
+          background: var(--box-weathered);
           padding: 0.5rem 0.75rem;
           font-size: 11px;
-          color: #e5e7eb;
+          color: var(--forest-text);
         }
         .input:focus {
           outline: none;
-          border-color: #3a4d40;
+          border-color: #456c5d;
         }
       `}</style>
     </div>
@@ -343,8 +343,8 @@ export default function SettingsPage() {
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-[#24332a] bg-[#101a14] p-4">
-      <p className="mb-4 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+    <div className="rounded-lg border border-[#2a4039] bg-[#0d1b17] p-4 shadow-sm">
+      <p className="mb-4 text-[10px] font-semibold uppercase tracking-wider text-[#a7bdb2]">
         {title}
       </p>
       {children}

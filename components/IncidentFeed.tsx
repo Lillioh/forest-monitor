@@ -12,20 +12,20 @@ export default function IncidentFeed() {
   const visible = alerts.slice(0, 5);
 
   return (
-    <aside className="hidden w-[280px] shrink-0 border-l border-[#1e2b24] bg-[#0c1510] p-3 lg:block">
+    <aside className="hidden w-[280px] shrink-0 border-l border-[#d8e6d8] bg-[#eef5ef] p-3 lg:block">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-xs font-bold tracking-wide text-gray-200">INCIDENT FEED</h2>
+        <h2 className="text-xs font-bold tracking-wide text-[#183126]">INCIDENT FEED</h2>
         <button
           onClick={triggerDetection}
           title="Manually simulate a new sensor detection (stand-in for the LoRa/Raspberry Pi feed, not yet connected)"
-          className="rounded border border-[#26352b] px-2 py-1 text-[9px] text-gray-400 hover:bg-[#19251e]"
+          className="rounded border border-[#cfe0d1] bg-[#f4faf5] px-2 py-1 text-[9px] text-[#446456] hover:bg-[#e7f1e8]"
         >
           + Simulate Ping
         </button>
       </div>
 
       {visible.length === 0 ? (
-        <div className="rounded-md border border-dashed border-[#26352b] p-4 text-center text-[10px] text-gray-600">
+        <div className="rounded-md border border-dashed border-[#cfe0d1] bg-[#f5faf6] p-4 text-center text-[10px] text-[#567263]">
           No detections yet. Waiting on the sensor mesh
           <span className="animate-pulse">…</span>
         </div>
@@ -70,7 +70,7 @@ function IncidentCard({
   return (
     <div
       className={`rounded-md border p-3 ${
-        isNew ? "border-[#e45642] bg-[#1c1d16]" : "border-[#26352b] bg-[#121c16]"
+        isNew ? "border-[#e45642] bg-[#171d1a]" : "border-[#234038] bg-[#122620]"
       }`}
     >
       <div className="flex items-center justify-between">

@@ -1,8 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  background: #0b120f;
-  color: white;
+  --forest-bg: #edf3ee;
+  --forest-surface: #f8fbf9;
+  --forest-panel: #e7efe9;
+  --forest-panel-strong: #dfeae0;
+  --forest-border: #c9d9ce;
+  --forest-border-strong: #afc4b1;
+  --forest-brand: #7bb68c;
+  --forest-brand-strong: #4d8a60;
+  --forest-text: #183126;
+  --forest-muted: #4a6256;
+  --forest-accent: #e7b55b;
+  --forest-dark-panel: #0d1b17;
+  --forest-dark-panel-soft: #112720;
+  --forest-dark-border: #233d36;
+  --box-weathered: var(--forest-border);
+  --box-livingstone: var(--forest-border-strong);
+  --box-sage: var(--forest-border-strong);
+  --box-dark-grey: var(--forest-dark-panel);
+  --box-bronze: var(--forest-muted);
+  background: var(--forest-bg);
+  color: var(--forest-text);
 }
 
 * {
@@ -17,10 +36,68 @@ body {
 }
 
 body {
-  background: #0b120f;
+  background: var(--forest-bg);
+  color: var(--forest-text);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
   cursor: pointer;
+}
+
+.forest-page-shell {
+  background-color: var(--forest-bg);
+  background-image:
+    linear-gradient(rgba(237, 243, 238, 0.88), rgba(237, 243, 238, 0.88)),
+    url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=85");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Shared palette bridge for the older dark utility classes. */
+[class~="bg-[#0d1b17]"],
+[class~="bg-[#0f1913]"],
+[class~="bg-[#101a14]"],
+[class~="bg-[#0f1d18]"],
+[class~="bg-[#112720]"],
+[class~="bg-[#17221b]"],
+[class~="bg-[#122620]"],
+[class~="bg-[#152018]"],
+[class~="bg-[#0d1811]"] {
+  background-color: var(--box-weathered) !important;
+}
+
+[class~="bg-[#0d1811]/80"],
+[class~="bg-[#171d1a]"],
+[class~="bg-[#19251e]"],
+[class~="bg-[#253229]"],
+[class~="bg-[#2a3830]"] {
+  background-color: var(--box-sage) !important;
+}
+
+[class~="border-[#24332a]"],
+[class~="border-[#24342a]"],
+[class~="border-[#243d36]"],
+[class~="border-[#26352b]"],
+[class~="border-[#2a4039]"],
+[class~="border-[#34463a]"],
+[class~="border-[#1b2620]"] {
+  border-color: var(--box-bronze) !important;
+}
+
+[class~="bg-[#e6a52d]"],
+[class~="bg-[#e5a52d]"],
+[class~="bg-[#e6a52d]/15"],
+[class~="bg-[#e7a52c]/15"] {
+  background-color: var(--box-bronze) !important;
+}
+
+[class*="bg-[#"] [class~="text-gray-300"],
+[class*="bg-[#"] [class~="text-gray-400"],
+[class*="bg-[#"] [class~="text-gray-500"],
+[class*="bg-[#"] [class~="text-gray-600"],
+[class*="bg-[#"][class~="text-white"],
+[class*="bg-[#"] [class~="text-white"] {
+  color: var(--forest-text) !important;
 }

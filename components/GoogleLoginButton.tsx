@@ -5,10 +5,12 @@ import { useState } from "react";
 
 export default function GoogleLoginButton() {
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleLogin = async () => {
     try {
       setLoading(true);
+      setErrorMessage(null);
 
       const supabase = createClient();
 
@@ -21,20 +23,27 @@ export default function GoogleLoginButton() {
 
       if (error) {
         console.error(error);
+        setErrorMessage("Google sign-in is unavailable right now.");
         setLoading(false);
       }
     } catch (error) {
       console.error(error);
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Google sign-in is unavailable right now."
+      );
       setLoading(false);
     }
   };
 
   return (
-    <button
-      onClick={handleLogin}
-      disabled={loading}
-      className="group flex w-full items-center justify-center gap-3 rounded-lg border border-[#34463a] bg-[#17221b] px-5 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-[#536b59] hover:bg-[#1d2b22] disabled:cursor-not-allowed disabled:opacity-60"
-    >
+    <>
+      <button
+        onClick={handleLogin}
+        disabled={loading}
+        className="group flex w-full items-center justify-center gap-3 rounded-lg border border-[#34463a] bg-[#17221b] px-5 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-[#536b59] hover:bg-[#1d2b22] disabled:cursor-not-allowed disabled:opacity-60"
+      >
       {/* Google Icon */}
       <svg
         width="19"
@@ -63,7 +72,14 @@ export default function GoogleLoginButton() {
         />
       </svg>
 
-      {loading ? "Connecting..." : "Continue with Google"}
-    </button>
+        {loading ? "Connecting..." : "Continue with Google"}
+      </button>
+
+      {errorMessage && (
+        <p className="mt-2 text-center text-xs text-[#f2a7a7]" role="alert">
+          {errorMessage}
+        </p>
+      )}
+    </>
   );
 }

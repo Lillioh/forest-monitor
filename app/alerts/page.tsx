@@ -74,8 +74,8 @@ export default function AlertLogPage() {
     <div className="flex min-h-0 flex-1 flex-col gap-4 p-5 lg:flex-row">
       <div className="min-w-0 flex-1">
         <div className="mb-4 flex flex-wrap items-center gap-2">
-          <div className="flex flex-1 min-w-[220px] items-center gap-2 rounded-md border border-[#24332a] bg-[#101a14] px-3 py-2">
-            <Search size={13} className="text-gray-600" />
+          <div className="flex flex-1 min-w-[220px] items-center gap-2 rounded-md border border-[#2a4039] bg-[#112720] px-3 py-2">
+            <Search size={13} className="text-[#9bb5a9]" />
             <input
               value={search}
               onChange={(e) => {
@@ -83,7 +83,7 @@ export default function AlertLogPage() {
                 setPage(1);
               }}
               placeholder="Search coordinates, IDs, categories..."
-              className="w-full bg-transparent text-[11px] text-gray-200 placeholder:text-gray-600 focus:outline-none"
+              className="w-full bg-transparent text-[11px] text-[#edf5ef] placeholder:text-[#8ba79e] focus:outline-none"
             />
           </div>
 
@@ -93,7 +93,7 @@ export default function AlertLogPage() {
               setStatusFilter(e.target.value as AlertStatus | "ALL");
               setPage(1);
             }}
-            className="rounded-md border border-[#24332a] bg-[#101a14] px-3 py-2 text-[11px] text-gray-300 focus:outline-none"
+            className="rounded-md border border-[#2a4039] bg-[#112720] px-3 py-2 text-[11px] text-[#edf5ef] focus:outline-none"
           >
             {STATUS_FILTERS.map((f) => (
               <option key={f.value} value={f.value}>
@@ -103,10 +103,10 @@ export default function AlertLogPage() {
           </select>
         </div>
 
-        <div className="overflow-hidden rounded-lg border border-[#24332a] bg-[#0f1913]">
+        <div className="overflow-hidden rounded-lg border border-[#2a4039] bg-[#0d1b17]">
           <table className="w-full text-left text-[11px]">
             <thead>
-              <tr className="text-[9px] uppercase tracking-wider text-gray-600">
+              <tr className="text-[9px] uppercase tracking-wider text-[#a5b9b1]">
                 <th className="px-3 py-2 font-medium">ID</th>
                 <th className="px-3 py-2 font-medium">Time</th>
                 <th className="px-3 py-2 font-medium">Est. Coordinates</th>

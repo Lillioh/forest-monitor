@@ -12,12 +12,12 @@ export default function SensorCard({
   status,
 }: SensorCardProps) {
   return (
-    <div className="rounded-lg border border-[#24332a] bg-[#101a14] p-3">
+    <div className="rounded-lg border border-[#2a4039] bg-[#0f1d18] p-3 shadow-sm">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold">{name}</span>
+        <span className="text-xs font-semibold text-[#edf5ef]">{name}</span>
 
-        <span className="flex items-center gap-1.5 text-[8px] text-[#75b878]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#75b878]" />
+        <span className="flex items-center gap-1.5 text-[8px] text-[#8ac79c]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#8ac79c]" />
           {status}
         </span>
       </div>

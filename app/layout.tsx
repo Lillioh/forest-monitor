@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full bg-[#0b120f] text-white">
+      <body className="min-h-full bg-[var(--forest-bg)] text-[var(--forest-text)]">
         <AlertsProvider>
-          <main className="flex h-screen overflow-hidden">
+          <main className="flex h-screen overflow-hidden bg-[var(--forest-bg)]">
             <Sidebar />
 
-            <section className="flex min-w-0 flex-1 flex-col">
+            <section className="forest-page-shell flex min-w-0 flex-1 flex-col">
               <TopBar />
-              <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
+              <div className="min-h-0 flex-1 overflow-y-auto bg-transparent">{children}</div>
             </section>
           </main>
         </AlertsProvider>
